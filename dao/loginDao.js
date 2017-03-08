@@ -1,5 +1,5 @@
 const sql = require('../sql/sql');
-class LeagueDao {
+class LoginDao {
   constructor () {
     // console.log(this.getLeagueList)
   }
@@ -29,4 +29,4 @@ class LeagueDao {
   }
 }
 
-module.exports = LeagueDao;
+module.exports = LoginDao;
