@@ -28,7 +28,7 @@ class UserService {
     return promise
   }
 
-  editContactUserList (req, res) {
+  editUserInfo (req, res) {
     let body = req.body
     let contactId = body.cuid
     let userMsg = {}

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var login = require('./routes/login')
 var contact = require('./routes/contact')
+var user = require('./routes/user')
 var sql = require('./sql/sql')
 var app = express();
 var config = require('./config/dbconfig');
@@ -47,6 +48,7 @@ app.all('*', function(req, res, next) {
 
 app.use('/login', login)
 app.use('/contact', contact)
+app.use('/user', user)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   console.log(req.url)
