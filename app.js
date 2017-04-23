@@ -24,13 +24,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(function(req, res, next) {
   let body = req.body
-  let key
-  for (let item in body) {
-    key = item
-    break
+  if (!body) {
+    let key
+    for (let item in body) {
+      key = item
+      break
+    }
+    key = JSON.parse(key)
+    req.body = key
   }
-  key = JSON.parse(key)
-  req.body = key
   next()
 })
 app.use(cookieParser());
@@ -51,7 +53,6 @@ app.use('/contact', contact)
 app.use('/user', user)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log(req.url)
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

@@ -3,7 +3,7 @@ var router = express.Router();
 /* GET home page. */
 var loginService = require('../services/login')
 router.get('/', function(req, res, next) {
-
+  console.log("访问成成功");
   res.json({
     code: 0,
     msg: 'success',
@@ -13,12 +13,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   loginService.login(req, res).then(function(result) {
-    if (result) res.json({
+    if (result.length !== 0) res.json({
       code: 0,
-      msg: 'success'
+      msg: 'success',
+      data: result
     })
     else res.json({
-      code: '400404',
+      code: 400404,
       msg: '没有该用户'
     })
   }, function(err) {

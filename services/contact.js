@@ -7,6 +7,7 @@ class ContactService {
   addContactUserList (req, res) {
     let body = req.body
     let contactMsg = {}
+    if (body.cuid) contactMsg.cuid = body.cuid
     if (body.name) contactMsg.name = body.name
     if (body.mobile) contactMsg.mobile = body.mobile
     if (body.homepage) contactMsg.homepage = body.homepage
@@ -43,7 +44,8 @@ class ContactService {
   }
   editContactUserList (req, res) {
     let body = req.body
-    let contactId = body.cuid
+    console.log()
+    let contactId = body.id
     let contactMsg = {}
     if (body.name) contactMsg.name = body.name
     if (body.mobile) contactMsg.mobile = body.mobile
@@ -66,15 +68,19 @@ class ContactService {
     return promise
   }
   getContactUserList (req, res) {
-    let body = req.body
+    let urlParse = url.parse(req.url, true);
+    let query = urlParse.query;
     let searchs = {}
-    if (body.name) searchs.name = body.name
+    if (query.cuid) searchs.cuid = query.cuid
+    console.log('search', searchs)
     let promise = new Promise(function(resolve, reject) {
       contactDao.select(searchs).then(function(result) {
+      console.log('result', result);
         let code = false
         if (result.length !== 0) code = true
-        resolve(code)
+        resolve(result)
       }, function (err) {
+        console.log(err)
         reject(err)
       });
     })

@@ -3,7 +3,7 @@ var router = express.Router();
 /* GET home page. */
 var userService = require('../services/user')
 router.get('/getuserinfo', function(req, res, next) {
-  userService.getUserMsg(req, res).then(function（result) {
+  userService.getUserMsg(req, res).then(function(result) {
     if (result) res.json({
       code: 0,
       msg: 'success'

@@ -6,13 +6,13 @@ let loginDao = new LoginDao();
 class LoginService {
   login (req, res) {
     let body = req.body
-    let account = body.account
+    let account = body.email
     let password = body.password
     let promise = new Promise(function(resolve, reject) {
       loginDao.login(account, password).then(function(result) {
         let code = false
         if (result.length !== 0) code = true
-        resolve(code)
+        resolve(result)
       }, function (err) {
         reject(err)
       });

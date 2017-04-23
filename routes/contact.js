@@ -3,16 +3,20 @@ var router = express.Router();
 /* GET home page. */
 var contactService = require('../services/contact')
 router.get('/getcontactlist', function(req, res, next) {
+  contactService.getContactUserList(req, res).then(function(result) {
+    console.log(result);
+    res.json({
+      code: 0,
+      msg: 'success',
+      data: result
+    })
+  }, function (err) {
 
-  res.json({
-    code: 0,
-    msg: 'success',
-    data: 'TEST'
   })
 });
 
 router.post('/addcontact', function(req, res, next) {
-  contactService.edit(req, res).then(function(result) {
+  contactService.addContactUserList(req, res).then(function(result) {
     if (result) res.json({
       code: 0,
       msg: 'success'
@@ -27,7 +31,7 @@ router.post('/addcontact', function(req, res, next) {
 })
 
 router.post('/editcontact', function(req, res, next) {
-  contactService.edit(req, res).then(function(result) {
+  contactService.editContactUserList(req, res).then(function(result) {
     if (result) res.json({
       code: 0,
       msg: 'success'
@@ -42,7 +46,7 @@ router.post('/editcontact', function(req, res, next) {
 })
 
 router.post('/delcontact', function (req, res, next) {
-  contactService.registry(req, res).then(function (result) {
+  contactService.delContactUserList(req, res).then(function (result) {
     if (result === 0) res.json({
       code: 0,
       msg: 'success'

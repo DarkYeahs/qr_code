@@ -8,7 +8,7 @@ class LoginDao {
       let condition = ''
       condition += "account='" + account + "'"
       condition += " and password='" + password + "'"
-      sql.table('user').field('account,password, userid').condition(condition).select().then(results => {
+      sql.table('user').field('*').condition(condition).select().then(results => {
         resolve(results);
       }, err => {
         reject(err);

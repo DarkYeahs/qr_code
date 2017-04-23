@@ -31,6 +31,7 @@ class Mysql {
     return promise;
   }
   table(table) {
+    console.log('table', table);
     this.tableString = table
     return this;
   }
@@ -43,17 +44,19 @@ class Mysql {
     return this;
   }
   select() {
+    console.log('test')
     let sql = `select ${this.fieldString} from ${this.tableString} where 1`;
-    if (this.conditionString) sql = `${sql} and ${conditionString}`;
+    console.log(this.conditionString, this.conditionString !== '')
+    if (this.conditionString !== '') sql = `${sql} and ${this.conditionString}`;
     return this.query(sql);
   }
   insert(values) {
-    if(!(value instanceof Object)) throw Error('values is not Object')
+    if(!(values instanceof Object)) throw Error('values is not Object')
     let keys = []
     let item = []
     for(let i in values) {
       keys.push(i)
-      item.push(values[i])
+      item.push(`'${values[i]}'`)
     }
     keys = keys.join(',')
     item = item.join(',')
@@ -61,7 +64,7 @@ class Mysql {
     return this.query(sql);
   }
   update(values) {
-    if(!(value instanceof Object)) throw Error('values is not Object')
+    if(!(values instanceof Object)) throw Error('values is not Object')
     let update = []
     for(let i in values) {
       let item = values[i]
@@ -70,12 +73,12 @@ class Mysql {
     }
     update = update.join(',')
     let sql = `update ${this.tableString} set ${update} where 1`;
-    if (conditionString) sql = `${sql} and ${conditionString}`;
+    if (this.conditionString) sql = `${sql} and ${this.conditionString}`;
     return this.query(sql);
   }
   del() {
     let sql = `delete from ${this.tabelString} where 1`;
-    if (this.conditionString) sql = `${sql} and ${conditionString}`;
+    if (this.conditionString) sql = `${sql} and ${this.conditionString}`;
     return this.query(sql);
   }
 }
