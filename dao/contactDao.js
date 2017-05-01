@@ -17,8 +17,8 @@ class ContactDao {
   del (contactId) {
     let promise = new Promise(function(resolve, reject) {
       let condition = ''
-      if (!contactid) throw new Error('contactId is null')
-      condition += `cuid='${contactId}'`
+      if (!contactId) throw new Error('contactId is null')
+      condition += `id='${contactId}'`
       sql.table('contact_user').condition(condition).del().then(results => {
         resolve(results);
       }, err => {
@@ -32,7 +32,7 @@ class ContactDao {
     let promise = new Promise(function(resolve, reject) {
       let condition = ''
       if (!contactId) throw new Error('contactId is null')
-      condition += `id=${contactId}`
+      condition += `id='${contactId}'`
       sql.table('contact_user').condition(condition).update(values).then(results => {
         resolve(results);
       }, err => {

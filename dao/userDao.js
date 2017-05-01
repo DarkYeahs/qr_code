@@ -18,7 +18,7 @@ class UserDao {
     let promise = new Promise(function(resolve, reject) {
       let condition = ''
       if (!userid) throw new Error('userid is null')
-      condition += `uid=${userid}`
+      condition += `uid='${userid}'`
       sql.table('user').condition(condition).update(values).then(results => {
         resolve(results);
       }, err => {

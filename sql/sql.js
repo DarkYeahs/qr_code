@@ -77,7 +77,7 @@ class Mysql {
     return this.query(sql);
   }
   del() {
-    let sql = `delete from ${this.tabelString} where 1`;
+    let sql = `delete from ${this.tableString} where 1`;
     if (this.conditionString) sql = `${sql} and ${this.conditionString}`;
     return this.query(sql);
   }

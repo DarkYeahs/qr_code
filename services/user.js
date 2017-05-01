@@ -17,7 +17,7 @@ class UserService {
     if (body.company) userMsg.company = body.company
     if (body.remark) userMsg.remark = body.remark
     let promise = new Promise(function(resolve, reject) {
-      contactDao.add(userMsg).then(function(result) {
+      userDao.add(userMsg).then(function(result) {
         let code = false
         if (result.length !== 0) code = true
         resolve(code)
@@ -30,7 +30,7 @@ class UserService {
 
   editUserInfo (req, res) {
     let body = req.body
-    let contactId = body.cuid
+    let contactId = body.id
     let userMsg = {}
     if (body.name) userMsg.name = body.name
     if (body.mobile) userMsg.mobile = body.mobile
@@ -42,7 +42,7 @@ class UserService {
     if (body.company) userMsg.company = body.company
     if (body.remark) userMsg.remark = body.remark
     let promise = new Promise(function(resolve, reject) {
-      contactDao.update(userMsg, contactId).then(function(result) {
+      userDao.update(userMsg, contactId).then(function(result) {
         let code = false
         if (result.length !== 0) code = true
         resolve(code)
@@ -58,7 +58,7 @@ class UserService {
     let searchs = {}
     searchs.uid = body.uid
     let promise = new Promise(function(resolve, reject) {
-      contactDao.select(searchs).then(function(result) {
+      userDao.select(searchs).then(function(result) {
         let code = false
         if (result.length !== 0) code = true
         resolve(code)

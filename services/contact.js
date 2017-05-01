@@ -1,5 +1,6 @@
-const ContactDao = require('../dao/contactDao');
+const ContactDao = require('../dao/contactDao')
 const url = require('url')
+const fs = require("fs")
 const timeTools = require('../common/time')
 /* GET users listing. */
 let contactDao = new ContactDao();
@@ -30,9 +31,9 @@ class ContactService {
   }
   delContactUserList (req, res) {
     let body = req.body
-    let cuid = body.cuid
+    let id = body.id
     let promise = new Promise(function(resolve, reject) {
-      contactDao.del(cuid).then(function(result) {
+      contactDao.del(id).then(function(result) {
         let code = false
         if (result.length !== 0) code = true
         resolve(code)
@@ -44,9 +45,21 @@ class ContactService {
   }
   editContactUserList (req, res) {
     let body = req.body
-    console.log()
+    let avatarBitmap = body.avatarBitmap
+    console.log(avatarBitmap)
+    var dataBuffer = new Buffer(avatarBitmap, 'base64');
+    let fileName = new Date().getTime();
     let contactId = body.id
     let contactMsg = {}
+    fs.writeFile(`public/static/${fileName}.png`, dataBuffer, function(err) {
+      if(err){
+        console.log(err)
+      }else{
+        contactMsg.icon = `public/static/${fileName}.png`
+        console.log(new Date().getTime())
+      }
+    });
+    console.log(new Date().getTime())
     if (body.name) contactMsg.name = body.name
     if (body.mobile) contactMsg.mobile = body.mobile
     if (body.homepage) contactMsg.homepage = body.homepage

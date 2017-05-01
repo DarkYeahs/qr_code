@@ -18,7 +18,7 @@ router.get('/getuserinfo', function(req, res, next) {
 });
 
 router.post('/editUserInfo', function(req, res, next) {
-  userService.edit(req, res).then(function(result) {
+  userService.editUserInfo(req, res).then(function(result) {
     if (result) res.json({
       code: 0,
       msg: 'success'
