@@ -14,11 +14,12 @@ class UserDao {
     return promise;
   }
 
-  update (values, userid) {
+  update (values, userid, password) {
     let promise = new Promise(function(resolve, reject) {
       let condition = ''
       if (!userid) throw new Error('userid is null')
       condition += `uid='${userid}'`
+      if (password !== "") condition = `${condition} and password = '${password}'`
       sql.table('user').condition(condition).update(values).then(results => {
         resolve(results);
       }, err => {

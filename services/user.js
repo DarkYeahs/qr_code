@@ -31,6 +31,7 @@ class UserService {
   editUserInfo (req, res) {
     let body = req.body
     let contactId = body.id
+    let password = "";
     let userMsg = {}
     if (body.name) userMsg.name = body.name
     if (body.mobile) userMsg.mobile = body.mobile
@@ -41,8 +42,10 @@ class UserService {
     if (body.job) userMsg.job = body.job
     if (body.company) userMsg.company = body.company
     if (body.remark) userMsg.remark = body.remark
+    if (body.password) password = body.password
+    if (body.newpassword) userMsg.password = body.newpassword
     let promise = new Promise(function(resolve, reject) {
-      userDao.update(userMsg, contactId).then(function(result) {
+      userDao.update(userMsg, contactId, password).then(function(result) {
         let code = false
         if (result.length !== 0) code = true
         resolve(code)
