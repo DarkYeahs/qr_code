@@ -9,15 +9,15 @@ class ContactService {
     let body = req.body
     let contactMsg = {}
     if (body.cuid) contactMsg.cuid = body.cuid
-    if (body.name) contactMsg.name = body.name
-    if (body.mobile) contactMsg.mobile = body.mobile
-    if (body.homepage) contactMsg.homepage = body.homepage
-    if (body.home_address) contactMsg.home_address = body.home_address
-    if (body.company_address) contactMsg.company_address = body.company_address
-    if (body.email) contactMsg.email = body.email
-    if (body.job) contactMsg.job = body.job
-    if (body.company) contactMsg.company = body.company
-    if (body.remark) contactMsg.remark = body.remark
+    contactMsg.name = body.name || ''
+    contactMsg.mobile = body.mobile || ''
+    contactMsg.homepage = body.homepage || ''
+    contactMsg.home_address = body.home_address || ''
+    contactMsg.company_address = body.company_address || ''
+    contactMsg.email = body.email || ''
+    contactMsg.job = body.job || ''
+    contactMsg.company = body.company || ''
+    contactMsg.remark = body.remark | ''
     let promise = new Promise(function(resolve, reject) {
       contactDao.add(contactMsg).then(function(result) {
         let code = false
