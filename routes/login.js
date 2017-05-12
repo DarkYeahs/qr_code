@@ -23,7 +23,10 @@ router.post('/', function(req, res, next) {
       msg: '没有该用户'
     })
   }, function(err) {
-    console.log(err)
+     res.json({
+      code: 500,
+      msg: '服务器错误'
+    })
   })
 })
 

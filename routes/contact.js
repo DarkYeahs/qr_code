@@ -11,7 +11,10 @@ router.get('/getcontactlist', function(req, res, next) {
       data: result
     })
   }, function (err) {
-
+    res.json({
+      code: 500,
+      msg: '服务器错误'
+    })
   })
 });
 
@@ -25,8 +28,11 @@ router.post('/addcontact', function(req, res, next) {
       code: '400404',
       msg: '没有该用户'
     })
-  }, function(err) {
-    console.log(err)
+  }, function(err) { 
+    res.json({
+      code: 500,
+      msg: '服务器错误'
+    })
   })
 })
 
@@ -41,7 +47,10 @@ router.post('/editcontact', function(req, res, next) {
       msg: '没有该用户'
     })
   }, function(err) {
-    console.log(err)
+     res.json({
+      code: 500,
+      msg: '服务器错误'
+    })
   })
 })
 
